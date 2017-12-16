@@ -1,9 +1,11 @@
 body {
     background: gray;
+    background-image: url("./../images/stage.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
 }
 .container {
-    background: white;
-    border: 5px solid black;
     height: 80%;
     width:70%;
     margin: 0 auto;
@@ -13,24 +15,31 @@ body {
     font-size: 20px;
     height: 30px;
     width: 80%;
-    border: 3px solid black;
+    border: 5px solid black;
     margin: 10px 10% 10px 10%;
+    background: lightblue;
+    border-radius: 27px;
     text-align: center;
+    color: white;;
 }
 .question {
     font-size: 20px;
-    height: 30px;
+    height: 40px;
     width: 80%;
     border: 3px solid black;
-    background: lightblue;
+    background: darkblue;
+    color: white;
 }
 .choice{
     font-size: 20px;
     height: 30px;
     width: 80%;
-    border: 3px solid black;
+    border: 5px solid black;
     margin: 10px 10% 10px 10%;
-    background: lightgreen;
+    background: lightblue;
+    border-radius: 27px;
+    text-align: center;
+    color: white;
 }
 .choice:hover {
     background: purple;
