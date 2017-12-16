@@ -1,0 +1,37 @@
+body {
+    background: gray;
+}
+.container {
+    background: white;
+    border: 5px solid black;
+    height: 80%;
+    width:70%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.time{
+    font-size: 20px;
+    height: 30px;
+    width: 80%;
+    border: 3px solid black;
+    margin: 10px 10% 10px 10%;
+    text-align: center;
+}
+.question {
+    font-size: 20px;
+    height: 30px;
+    width: 80%;
+    border: 3px solid black;
+    background: lightblue;
+}
+.choice{
+    font-size: 20px;
+    height: 30px;
+    width: 80%;
+    border: 3px solid black;
+    margin: 10px 10% 10px 10%;
+    background: lightgreen;
+}
+.choice:hover {
+    background: purple;
+}
