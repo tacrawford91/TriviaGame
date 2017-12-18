@@ -9,18 +9,27 @@ b<!DOCTYPE html>
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
 </head>
-<link rel="stylesheet" href="assets/css/reset.css">
-<link rel="stylesheet" href="assets/css/style.css">
 <div class="container">
-    <h1>Who wants to Be A Crypto-illionaire!</h1>
+    <div class="welcome">
+        <h1>Welcome to Who Wants to be a Crypto-illionaire!</h1>
+        <h2>A game built to test your knowledge on cryptocurrencies!</h2>
+        <h2>Press the start button below when ready to begin.</h2>
+        <button class="start">START</button>
+    </div>
+    <h1 class="title">Who wants to Be A Crypto-illionaire!</h1>
     <div class="time">
         <h1 class="timer">Time Remaining: 30</h1>
     </div>
     <div class="results">
         <div class="question"></div>
+        <div class="correctAnswer"></div>
         <div class="choice a"></div>
         <div class="choice b"></div>
+        <div class="image"></div>
         <div class="choice c"></div>
         <div class="choice d"></div>
     </div>

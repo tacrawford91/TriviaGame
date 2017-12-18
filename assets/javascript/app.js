@@ -1,11 +1,11 @@
 var trivia = {
-    question: ["what color is the sky?", "what is upDawg?"],
+    question: ["What color is the sky?", "What is upDawg?"],
     a:["green", "hello cat"],
     b:["blue", "hello Dog"],
     c:["red", "Whatsup Dawg"],
     d:["yellow", "bad dog"],
     answer:["b" ,"c"],
-    image: ["./../images/placeHolder.JPG","./../images/placeHolder.JPG"]
+    image: ["./../TriviaGame/assets/images/bitcoin.jfif"]
 }
 
 // var superTrivia = [
@@ -44,6 +44,10 @@ var timeRemaining = 30;
 var questionNumber = 0;
 var usersChoice;
 var timerValue;
+// audio
+var questionSound = new Audio("../TriviaGame/assets/audio/question.mp3");
+var correctSound = new Audio("../TriviaGame/assets/audio/correct.mp3");
+var wrongSound = new Audio("../TriviaGame/assets/audio/wrong.mp3");
 //functions
 //set interval for timer
 function startTimer() {
@@ -58,7 +62,9 @@ function startTimer() {
 //Generate html for each question
 function nextQuestion() {
     //Generate html for each question
-    $(".question").html(`<h1> ${trivia.question[questionNumber]} </h1>`);
+    $(".image").html("");
+    showHTML();
+    $(".question").html(`<h1> Question: ${trivia.question[questionNumber]} </h1>`);
     $(".a").attr("guess", "a").html(`<h1> ${trivia.a[questionNumber]} </h1>`);
     $(".b").attr("guess", "b").html(`<h1> ${trivia.b[questionNumber]} </h1>`);
     $(".c").attr("guess", "c").html(`<h1> ${trivia.c[questionNumber]} </h1>`);
@@ -67,28 +73,59 @@ function nextQuestion() {
     timeRemaining = 30;
     //Start CountDown
     timerValue = setInterval(startTimer, 1000);
+    //play audio
+    questionSound.play();
 };
 function emptyHTML(){
     $(".question").html("");
-    $(".a").attr("guess", "a").html("");
-    $(".b").attr("guess", "b").html("");
-    $(".c").attr("guess", "c").html("");
-    $(".d").attr("guess", "d").html("");
+    $(".a").attr("guess", "a").hide();
+    $(".b").attr("guess", "b").hide();
+    $(".c").attr("guess", "c").hide();
+    $(".d").attr("guess", "d").hide();
+}
+function showHTML() {
+    $(".question").html("");
+    $(".a").attr("guess", "a").show();
+    $(".b").attr("guess", "b").show();
+    $(".c").attr("guess", "c").show();
+    $(".d").attr("guess", "d").show();
 }
 function congrats() {
     emptyHTML()
     $(".question").html("<h1> Congrats </h1>");
+    questionSound.pause();
+    questionSound.currentTime = 0;
+    correctSound.play();
     //display correct answer
+
      //generate questionNumber Image
+     $(".image").html("<img src='"+trivia.image[questionNumber]+"'>");
 }
 function loser() {
     emptyHTML()
     $(".question").html("<h1> Wrong </h1>");
+    questionSound.pause();
+    questionSound.currentTime = 0;
+    wrongSound.play();
     //display correct answer
+    $(".correctAnswer").html(`<h1></h1>`)
      //generate questionNumber Image
 }
 //START APP
+$(".title").hide();
+$(".time").hide();
+$(".timer").hide();
+$(".results").hide();
+
+$(".start").on("click",function(){
+$(".welcome").hide();
 nextQuestion();
+$(".title").show();
+$(".time").show();
+$(".timer").show();
+$(".results").show();
+})
+
 
 //listen for users guess
 $(".choice").on("click", function(event){ 
