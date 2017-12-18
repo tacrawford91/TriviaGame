@@ -1,10 +1,10 @@
 var trivia = {
-    question: ["What color is the sky?", "What is upDawg?"],
-    a:["green", "hello cat"],
-    b:["blue", "hello Dog"],
-    c:["red", "Whatsup Dawg"],
-    d:["yellow", "bad dog"],
-    answer:["b" ,"c"],
+    question: ["Where are cryptocurrencies legal?", "Who was the creator of BitCoin?", "What is the maximum number of bitcoins that will/can be produced?", "What is blockchain?", "Where was the first Bitcoin-ATM installed?","Which car manufactuer was the first to accept bitcoin?", "What is the name of the process used to obtain new bitcoins?","When was the idea for bitcoin first published?"," Which of these US states introduced the BitLicense regulation for cryptocurrency companies?","Which of the following is popularly used for storing bitcoins"],
+    a:["United States", "Satoshi Nakamoto", "21 million","An algorithm developed to track the creation of all privately traded cryptocurrencies","Vancouver, Canada","Toyota","Digging","2012","New York","Stack"],
+    b:["United States & China", "Dr. Dean Paraskavas","18 million", "a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and publicly.", "Tokyo, Japan","Saab","Drilling","2008","California","Pocket"],
+    c:["United States & China & North Korea", "Unknown","30 million","a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and privately.", "No where","Ferrari","Chipping","2005","Texas","Wallet"],
+    d:["All over the world", "Gerald Bernaldo", "25 million","An algorithm developed to track the creation of all cryptocurrencies", "Silicon Valley","Lamborghini","Minning","2007","Washington","Purse"],
+    answer:["d" ,"c", "a","b","a","d","d","b","a","c"],
     image: ["./../TriviaGame/assets/images/bitcoin.jfif"]
 }
 
@@ -45,9 +45,9 @@ var questionNumber = 0;
 var usersChoice;
 var timerValue;
 // audio
-var questionSound = new Audio("../TriviaGame/assets/audio/question.mp3");
-var correctSound = new Audio("../TriviaGame/assets/audio/correct.mp3");
-var wrongSound = new Audio("../TriviaGame/assets/audio/wrong.mp3");
+var questionSound = new Audio("../TriviaGame/assets/javascript/audio/question.mp3");
+var correctSound = new Audio("../TriviaGame/assets/javascript/audio/correct.mp3");
+var wrongSound = new Audio("../TriviaGame/assets/javascript/audio/wrong.mp3");
 //functions
 //set interval for timer
 function startTimer() {
