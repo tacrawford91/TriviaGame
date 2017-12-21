@@ -91,3 +91,16 @@ button:hover{
     width: 20%;
     text-align: center;
 }
+.image {
+text-align: center;
+position: relative;
+bottom: -60px;
+}
+.answer {
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    margin-top: 15px;
+    width: 80%;
+}

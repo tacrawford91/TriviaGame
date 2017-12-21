@@ -1,10 +1,11 @@
 var trivia = {
     question: ["Where are cryptocurrencies legal?", "Who was the creator of BitCoin?", "What is the maximum number of bitcoins that will/can be produced?", "What is blockchain?", "Where was the first Bitcoin-ATM installed?","Which car manufactuer was the first to accept bitcoin?", "What is the name of the process used to obtain new bitcoins?","When was the idea for bitcoin first published?"," Which of these US states introduced the BitLicense regulation for cryptocurrency companies?","Which of the following is popularly used for storing bitcoins"],
-    a:["United States", "Satoshi Nakamoto", "21 million","An algorithm developed to track the creation of all privately traded cryptocurrencies","Vancouver, Canada","Toyota","Digging","2012","New York","Stack"],
-    b:["United States & China", "Dr. Dean Paraskavas","18 million", "a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and publicly.", "Tokyo, Japan","Saab","Drilling","2008","California","Pocket"],
-    c:["United States & China & North Korea", "Unknown","30 million","a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and privately.", "No where","Ferrari","Chipping","2005","Texas","Wallet"],
-    d:["All over the world", "Gerald Bernaldo", "25 million","An algorithm developed to track the creation of all cryptocurrencies", "Silicon Valley","Lamborghini","Minning","2007","Washington","Purse"],
+    a:["A. United States", "A. Satoshi Nakamoto", "A. 21 million","A. An algorithm developed to track the creation of all privately traded cryptocurrencies","A. Vancouver, Canada","A. Toyota","A. Digging","A. 2012","A. New York","A. Stack"],
+    b:["B. United States & China", "B. Dr. Dean Paraskavas","B. 18 million", "B. a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and publicly.", "B. Tokyo, Japan","B. Saab","B. Drilling","B. 2008","B. California","B. Pocket"],
+    c:["C. United States & China & North Korea", "C. Unknown","C. 30 million","C. a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and privately.", "C. No where","C. Ferrari","C. Chipping","C. 2005","C. Texas","C. Wallet"],
+    d:["D. All over the world", "D. Gerald Bernaldo", "D. 25 million","D. An algorithm developed to track the creation of all cryptocurrencies", "D. Silicon Valley","D. Lamborghini","D. Minning","D. 2007","D. Washington","D. Purse"],
     answer:["d" ,"c", "a","b","a","d","d","b","a","c"],
+    answerValue:["All over the world","Unknown", "21 million","a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and publicly.","Vancouver, Canada","Lamborghini", "Minning","2008","New York","Wallet"],
     image: ["./../TriviaGame/assets/images/bitcoin.jfif"]
 }
 
@@ -44,6 +45,7 @@ var timeRemaining = 30;
 var questionNumber = 0;
 var usersChoice;
 var timerValue;
+var correctAnswer = 0;
 // audio
 var questionSound = new Audio("../TriviaGame/assets/javascript/audio/question.mp3");
 var correctSound = new Audio("../TriviaGame/assets/javascript/audio/correct.mp3");
@@ -92,7 +94,7 @@ function showHTML() {
 }
 function congrats() {
     emptyHTML()
-    $(".question").html("<h1> Congrats </h1>");
+    $(".question").html(`<h1> Correct. Correct Answers: ${correctAnswer}/10 </h1>`);
     questionSound.pause();
     questionSound.currentTime = 0;
     correctSound.play();
@@ -108,8 +110,9 @@ function loser() {
     questionSound.currentTime = 0;
     wrongSound.play();
     //display correct answer
-    $(".correctAnswer").html(`<h1></h1>`)
-     //generate questionNumber Image
+    $(".Answer").html(`<h1>The Correct Answer was ${trivia.answer[questionNumber].toUpperCase()}: ${trivia.answerValue[questionNumber]}</h1>`)
+     //show wrong Image
+     $(".image").html("<img src='../TriviaGame/assets/images/wrong.gif'>");
 }
 //START APP
 $(".title").hide();
@@ -135,10 +138,11 @@ $(".choice").on("click", function(event){
             console.log("CORRECT!!!!");
             //Show Congrats
             clearInterval(timerValue)
+            correctAnswer++
             congrats();
             //generate new questions & reset questionTimer
             questionNumber++;
-            setTimeout(nextQuestion,10000)
+            setTimeout(nextQuestion,8000)
         } else {
             console.log("YOU LOSE");
             //Show you lose
@@ -146,7 +150,7 @@ $(".choice").on("click", function(event){
             loser();
             //generate questions & reset questionTimer
             questionNumber++;
-            setTimeout(nextQuestion,10000)
+            setTimeout(nextQuestion,8000)
         } 
 
         
