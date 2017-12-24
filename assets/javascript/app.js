@@ -6,38 +6,8 @@ var trivia = {
     d:["D. All over the world", "D. Gerald Bernaldo", "D. 25 million","D. An algorithm developed to track the creation of all cryptocurrencies", "D. Silicon Valley","D. Lamborghini","D. Minning","D. 2007","D. Washington","D. Purse"],
     answer:["d" ,"c", "a","b","a","d","d","b","a","c"],
     answerValue:["All over the world","Unknown", "21 million","a digital ledger in which transactions made in cryptocurrencies are recorded chronologically and publicly.","Vancouver, Canada","Lamborghini", "Minning","2008","New York","Wallet"],
-    image: ["./../TriviaGame/assets/images/bitcoin.jfif"]
+    image: ["./../TriviaGame/assets/images/crypto.jpg"]
 }
-
-// var superTrivia = [
-//     question1{
-//         question: ["what color is the sky?"]
-//         a:["green"],
-//         b:["blue"],
-//         c:["red"],
-//         d:["yellow"],
-//         answer:["blue"]
-//     }
-//     question2{
-//         question: ["what is upDawg?"]
-//         a:["hello cat"],
-//         b:["hello dog"],
-//         c:["Whatsup Dawg"],
-//         d:["bad dog"],
-//         answer:["Whatsup Dawg"]
-//     }
-// ]
-
-// var guessedRight = 0;
-// var guessedWrong = 0;
-
-// for (var i = 0; i < trivia.question.length; i++) {
-//     $(".question").append($("<h1>").text(trivia.question[i]))
-//     $(".a").append($("<div>").html(`<h1> ${trivia.a[i]} </h1>`));
-//     $(".b").append($("<div>").html(`<h1> ${trivia.b[i]} </h1>`));
-//     $(".c").append($("<div>").html(`<h1> ${trivia.c[i]} </h1>`));
-//     $(".d").append($("<div>").html(`<h1> ${trivia.d[i]} </h1>`));
-// }
 
 //intial timer
 var timeRemaining = 30;
@@ -47,9 +17,11 @@ var usersChoice;
 var timerValue;
 var correctAnswer = 0;
 // audio
-var questionSound = new Audio("../TriviaGame/assets/javascript/audio/question.mp3");
-var correctSound = new Audio("../TriviaGame/assets/javascript/audio/correct.mp3");
-var wrongSound = new Audio("../TriviaGame/assets/javascript/audio/wrong.mp3");
+var introSound = new Audio("../TriviaGame/assets/audio/intro.mp3")
+var questionSound = new Audio("../TriviaGame/assets/audio/question.mp3");
+var correctSound = new Audio("../TriviaGame/assets/audio/correct.mp3");
+var wrongSound = new Audio("../TriviaGame/assets/audio/wrong.mp3");
+var finalScreenSound = new Audio("../TriviaGame/assets/audio/finalScreen.mp3")
 //functions
 //set interval for timer
 function startTimer() {
@@ -57,16 +29,26 @@ function startTimer() {
     if (timeRemaining === 1) {
         clearInterval(timerValue)
         console.log("times Up!")
+        //Display times up screen
+        timesUp();
+        //generate questions & reset questionTimer
+        questionNumber++;
+        setTimeout(nextQuestion,8000)
     }
     timeRemaining = timeRemaining - 1
     $(".timer").html(`Time Remaining: ${timeRemaining}`)
 }
 //Generate html for each question
 function nextQuestion() {
+    //check if game is over
+    if (questionNumber === 10) {
+        finalScreen();
+    } else {
     //Generate html for each question
     $(".image").html("");
+    $(".answer").html("");
     showHTML();
-    $(".question").html(`<h1> Question: ${trivia.question[questionNumber]} </h1>`);
+    $(".question").html(`<h1> Question ${questionNumber+1}: ${trivia.question[questionNumber]} </h1>`);
     $(".a").attr("guess", "a").html(`<h1> ${trivia.a[questionNumber]} </h1>`);
     $(".b").attr("guess", "b").html(`<h1> ${trivia.b[questionNumber]} </h1>`);
     $(".c").attr("guess", "c").html(`<h1> ${trivia.c[questionNumber]} </h1>`);
@@ -77,6 +59,7 @@ function nextQuestion() {
     timerValue = setInterval(startTimer, 1000);
     //play audio
     questionSound.play();
+    }
 };
 function emptyHTML(){
     $(".question").html("");
@@ -94,18 +77,20 @@ function showHTML() {
 }
 function congrats() {
     emptyHTML()
-    $(".question").html(`<h1> Correct. Correct Answers: ${correctAnswer}/10 </h1>`);
+    $(".image").html("");
+    $(".answer").html("");
+    $(".question").html(`<h1> Correct!           Correct Answers: ${correctAnswer}/10 </h1>`);
     questionSound.pause();
     questionSound.currentTime = 0;
     correctSound.play();
     //display correct answer
 
      //generate questionNumber Image
-     $(".image").html("<img src='"+trivia.image[questionNumber]+"'>");
+     $(".image").html("<img src='../TriviaGame/assets/images/crypto.jpg'>");
 }
 function loser() {
     emptyHTML()
-    $(".question").html("<h1> Wrong </h1>");
+    $(".question").html("<h1> Incorrect </h1>");
     questionSound.pause();
     questionSound.currentTime = 0;
     wrongSound.play();
@@ -114,13 +99,62 @@ function loser() {
      //show wrong Image
      $(".image").html("<img src='../TriviaGame/assets/images/wrong.gif'>");
 }
+function finalScreen(){
+    console.log("gameover");
+    // emptyHTML();
+    // $(".image").html("");
+    // $(".answer").html("");
+    $(".title").hide();
+    $(".time").hide();
+    $(".timer").hide();
+    $(".results").hide();
+    $(".welcome").show()
+    finalScreenSound.play();
+    $(".firstScreen").hide()
+    $(".finalScreen").show();
+    $("#finalScore").text(`You answerered ${correctAnswer}/10 correctly.`)
+}
+function timesUp() {
+    emptyHTML()
+    $(".question").html("<h1> Time Expired </h1>");
+    questionSound.pause();
+    questionSound.currentTime = 0;
+    wrongSound.play();
+    //display correct answer
+    $(".Answer").html(`<h1>The Correct Answer was ${trivia.answer[questionNumber].toUpperCase()}: ${trivia.answerValue[questionNumber]}</h1>`)
+}
+function reset() {
+    emptyHTML();
+    finalScreenSound.pause();
+    $(".welcome").hide();
+    questionNumber = 0;
+    correctAnswer = 0;
+    
+    $(".finalScreen").hide();
+    nextQuestion();
+    $(".title").show();
+    $(".time").show();
+    $(".timer").show();
+    $(".results").show();
+    
+};
 //START APP
+
+//Inital Welcome Screen Setup
 $(".title").hide();
 $(".time").hide();
 $(".timer").hide();
 $(".results").hide();
+$(".finalScreen").hide();
 
+//start intro music
+$(document).ready ( function(){
+  introSound.play();
+ })
+
+ //Click Start button, Begin Game
 $(".start").on("click",function(){
+introSound.pause();
 $(".welcome").hide();
 nextQuestion();
 $(".title").show();
@@ -142,6 +176,7 @@ $(".choice").on("click", function(event){
             congrats();
             //generate new questions & reset questionTimer
             questionNumber++;
+            //generate final Screen
             setTimeout(nextQuestion,8000)
         } else {
             console.log("YOU LOSE");
@@ -151,28 +186,12 @@ $(".choice").on("click", function(event){
             //generate questions & reset questionTimer
             questionNumber++;
             setTimeout(nextQuestion,8000)
-        } 
+        }   
+});
 
-        
 
+//reset button
+$(".reset").on("click", function(){
+
+    reset();
 })
-        //if correct
-        //stop question timer, 
-        //display congrats for set time
-        //add to questionNumber
-        //reset question timer
-
-
-        //if wrong
-        // stop question timer
-        //display wrong!, 
-        // display what the correct answer was
-        //add to questionNumber
-        //reset question
-
-        //if questionTimer === 0
-        // display times up
-        //display correct answer
-        //
-
-
