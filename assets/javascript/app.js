@@ -10,7 +10,7 @@ var trivia = {
 }
 
 //intial timer
-var timeRemaining = 30;
+var timeRemaining = 25;
 //intial questionNumber 
 var questionNumber = 0;
 var usersChoice;
@@ -28,7 +28,7 @@ function startTimer() {
     //Stop timer if it equals zero 
     if (timeRemaining === 1) {
         clearInterval(timerValue)
-        console.log("times Up!")
+        // console.log("times Up!")
         //Display times up screen
         timesUp();
         //generate questions & reset questionTimer
@@ -54,7 +54,7 @@ function nextQuestion() {
     $(".c").attr("guess", "c").html(`<h1> ${trivia.c[questionNumber]} </h1>`);
     $(".d").attr("guess", "d").html(`<h1> ${trivia.d[questionNumber]} </h1>`);
     //Update Qeustion Timer
-    timeRemaining = 30;
+    timeRemaining = 25;
     //Start CountDown
     timerValue = setInterval(startTimer, 1000);
     //play audio
@@ -100,10 +100,7 @@ function loser() {
      $(".image").html("<img src='../TriviaGame/assets/images/wrong.gif'>");
 }
 function finalScreen(){
-    console.log("gameover");
-    // emptyHTML();
-    // $(".image").html("");
-    // $(".answer").html("");
+    // console.log("gameover");
     $(".title").hide();
     $(".time").hide();
     $(".timer").hide();
@@ -169,7 +166,7 @@ $(".choice").on("click", function(event){
         usersChoice = $(this)
         // compare choice to answer 
         if ( usersChoice.attr("guess") === trivia.answer[questionNumber]) {
-            console.log("CORRECT!!!!");
+            // console.log("CORRECT!!!!");
             //Show Congrats
             clearInterval(timerValue)
             correctAnswer++
@@ -179,7 +176,7 @@ $(".choice").on("click", function(event){
             //generate final Screen
             setTimeout(nextQuestion,8000)
         } else {
-            console.log("YOU LOSE");
+            // console.log("YOU LOSE");
             //Show you lose
             clearInterval(timerValue);
             loser();
